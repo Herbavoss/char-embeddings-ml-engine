@@ -28,20 +28,28 @@ def sample(preds, temperature=1.0):
 
 generated = ''
 diversity = 0.4
-sentence = '0.03% of the world online gambling marke'
+
+# sentence must be maxlen long
+#sentence = '0.03% of the world online gambling marke'
+sentence = '$12.5M USD denominated in ETH in our tok'
+#sentence = 'Abstract. A purely peer-to-peer version '
+
 generated += sentence
 print('----- Generating with seed: "' + sentence + '"')
 
-for i in range(1200):
-    x = np.zeros((1, maxlen), dtype=np.int)
-    for t, char in enumerate(sentence):
-        x[0, t] = char_indices[char]
+for diversity in [0.2, 0.5]:
+    print()
+    print('----- diversity:', diversity)
+    for i in range(2000):
+        x = np.zeros((1, maxlen), dtype=np.int)
+        for t, char in enumerate(sentence):
+            x[0, t] = char_indices[char]
 
-    preds = model.predict(x, verbose=0)[0][0]
-    next_index = sample(preds, diversity)
-    next_char = indices_char[next_index]
+        preds = model.predict(x, verbose=0)[0][0]
+        next_index = sample(preds, diversity)
+        next_char = indices_char[next_index]
 
-    generated += next_char
-    sentence = sentence[1:] + next_char
+        generated += next_char
+        sentence = sentence[1:] + next_char
 
-print generated
+    print generated

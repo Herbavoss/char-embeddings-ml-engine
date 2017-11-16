@@ -36,7 +36,7 @@ def random_subset(X, y, p=0.1):
     y = y[idx]
     return (X, y)
 
-def train_model(train_file='input.txt', job_dir='./tmp/', embeds_file='glove.840B.300d-char.txt', **args):
+def train_model(train_file='../data/input.txt', job_dir='./tmp/', embeds_file='glove.840B.300d-char.txt', **args):
     input_data_file = file_io.FileIO(train_file, mode='r')
     text = input_data_file.read()
 
