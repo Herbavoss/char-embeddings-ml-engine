@@ -1,4 +1,4 @@
+.DS_Store
 .vscode
 output
-input.txt
 gcloud.remote.run.sh
